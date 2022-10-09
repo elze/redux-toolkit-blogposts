@@ -1,3 +1,16 @@
+This application was created for a presentation at the Women Who Code ATX chapter. It illustrates React.js Redux-toolkit.
+
+It has a backend and a frontend. To start the backend server, while in the top-level directory of this application,
+
+`cd api`
+
+`npm install`
+
+`node index.js`
+
+Then, in a separate terminal window, `cd` to the top-level directory of this application, and follow the standard instructions below to start the frontend server.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
