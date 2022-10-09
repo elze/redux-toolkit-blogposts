@@ -1,3 +1,7 @@
+app-title {
+	padding-bottom: 10px;
+}
+
 .row {
   display: flex;
   align-items: center;
@@ -13,8 +17,28 @@
   margin-bottom: 16px;
 }
 
+.storiesContainer {
+	display: grid;
+	grid-template-columns: 50px 200px 300px 400px;
+	padding-left: 10px;
+}
+
+.storiesTableHeader {
+	margin-bottom: 30px;
+}
+
+.cellContainer {
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+	column-gap: 1em;
+	margin-bottom: 3px;
+	margin-top: 3px;
+}
+
+
 .value {
-  font-size: 78px;
+  font-size: 36px;
   padding-left: 16px;
   padding-right: 16px;
   margin-top: 2px;
@@ -35,6 +59,31 @@
   background-color: rgba(112, 76, 182, 0.1);
   border-radius: 2px;
   transition: all 0.15s;
+}
+
+.dropDownList {
+  font-size: 16px;
+  padding: 2px;
+  width: 300px;
+  text-align: left;
+  margin-right: 4px;
+}
+
+.paragraph { 
+  font-size: 18px;
+  margin-right: 12px;
+  padding-left: 12px;
+  padding-right: 12px;
+  outline: none;
+  border: 2px solid transparent;
+  color: rgb(112, 76, 182);
+  padding-bottom: 4px;
+  background-color: rgba(112, 76, 182, 0.1);
+  text-align: left;
+}
+
+.surroundingText { 
+  font-size: 16px;
 }
 
 .textbox {
