@@ -59,7 +59,8 @@ const initialState: UserStoriesState = {
 export const getUserStories = createAsyncThunk(
   'userstories/getUserStories',
   async (thunkAPI) => {
-    const res = await fetch('api/userstories').then(
+    // const res = await fetch('api/userstories').then(
+	const res = await fetch('https://api.geekitude.com/api/userStories').then(
     (data) => data.json()
   )
   return res
