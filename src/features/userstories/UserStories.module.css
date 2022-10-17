@@ -19,7 +19,7 @@ app-title {
 
 .storiesContainer {
 	display: grid;
-	grid-template-columns: 50px 200px 150px 400px;
+	grid-template-columns: 50px 200px 200px 400px;
 	padding-left: 10px;
 }
 
