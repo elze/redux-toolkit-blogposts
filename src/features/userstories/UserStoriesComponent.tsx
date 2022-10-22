@@ -1,7 +1,8 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useAppDispatch } from '../../app/hooks';
-import { changeStage, getUserStories, selectUserStories, stageOptions, UserStory, UserStoryStage } from './userStoriesSlice'
+import { changeStage, getUserStories, selectUserStories, stageOptions, UserStory, UserStoryStage } from './userStoriesSlice';
+import UserStoryComponent from './UserStoryComponent';
 import styles from './UserStories.module.css';
 
 export default function UserStoriesComponent() {
@@ -28,24 +29,11 @@ export default function UserStoriesComponent() {
 	}
   }
   
-
   return (
     <div>
       <h2>User stories</h2>
-	  
-      {entities.map((userStory: UserStory) => (
-		<div className={styles.storiesContainer} key={userStory.id}>
-			<div className={`${styles.surroundingText} ${styles.cellContainer}`}>{userStory.id}</div>
-			<div className={`${styles.surroundingText} ${styles.cellContainer}`}>{userStory.title}</div>
-			<div className={`${styles.surroundingText} ${styles.cellContainer}`}>{userStory.stage} <img src={userStory.imageUrl} alt={userStory.stage}/></div>
-			<div className={`${styles.surroundingText} ${styles.cellContainer}`}>Move to &nbsp;
-			<select className={styles.dropDownList} value={userStory.stage} onChange={(e) => handleChange(userStory, e)}>
-			  {stageOptions.map((option) => (
-				<option key={option.value} value={option.value}>{option.label}</option>
-			  ))}
-			</select>				
-			</div>			
-		</div>		
+	  {entities.map((userStory: UserStory, ind: number) => (
+	  <UserStoryComponent key={userStory.id} num={ind}/>
       ))}
     </div>
   )

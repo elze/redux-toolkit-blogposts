@@ -106,4 +106,6 @@ export const { changeStage } = userStoriesSlice.actions;
 
 export const selectUserStories = (state: RootState) => state.userstories;
 
+export const selectUserStory = (id: number) => (state: RootState) => state.userstories.entities[id];
+
 export default userStoriesSlice.reducer;
