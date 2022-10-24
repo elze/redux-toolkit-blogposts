@@ -4,28 +4,31 @@ app.use(bodyParser.json());
 
 const https = require('https');
 
-const userStories = 
+const blogposts = 
 [
 	{
 		id: '1111',
-		title: 'Implement authentication',
-		phase: 'toDo',
-		imageUrl: 'https://blog.geekitude.com/wp-content/uploads/2022/09/TicketStage_01_ToDo.jpg'
+		title: 'How to prevent re-renderings when using useSelector hook',
+		blogPostStatus: 'draft',
 	},
 	{
 		id: '2222',
-		title: 'Write unit tests',
-		phase: 'toDo',
-		imageUrl: 'https://blog.geekitude.com/wp-content/uploads/2022/09/TicketStage_01_ToDo.jpg'
-	}
+		title: 'How to prevent re-renderings when using Redux-Toolkit',
+		blogPostStatus: 'draft',
+	},
+	{
+		id: '3333',
+		title: 'Comparison between Redux and Redux-Toolkit',
+		blogPostStatus: 'draft',
+	}	
 ];
 
-app.set('port', (process.env.PORT || 8085));
+app.set('port', (process.env.PORT || 8086));
 
 
-app.get('/api/userstories', (req, res) => {
+app.get('/api/blogposts', (req, res) => {
 	try {			
-		res.send(userStories);
+		res.send(blogposts);
 	}
 	catch(err) {
 		var errMessage = `${err}`;
@@ -44,7 +47,7 @@ function processErrorResponse(res, statusCode, message) {
 }	
 
 app.listen(app.get('port'), function() {
-  console.log('Express app redux-toolkit-tickets is running on port', app.get('port'));
+  console.log('Express app redux-toolkit-blogposts is running on port', app.get('port'));
 });
 
 module.exports = app

@@ -4,10 +4,22 @@ import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import { store } from './app/store';
 import App from './App';
-import mockFetch from './mocks/mockFetch';
-import { changeStage, getUserStories, selectUserStories, stageOptions, UserStory, UserStoryStage } from './features/userstories/userStoriesSlice'
+import { changeStatus, getBlogPosts, selectBlogPosts, blogPostStatusOptions, BlogPost, PostAndStatus } from './features/blogposts/blogPostsSlice';
 
-test('renders learn react link', () => {
+const blogpostsResponse = [
+	{
+		id: '1111',
+		title: 'How to prevent re-renderings when using useSelector hook',
+		blogPostStatus: 'draft',
+	},
+	{
+		id: '2222',
+		title: 'How to prevent re-renderings when using Redux-Toolkit',
+		blogPostStatus: 'draft',
+	}
+]
+
+test('renders the Loading message', () => {
   const { getByText } = render(
     <Provider store={store}>
       <App />
@@ -17,22 +29,26 @@ test('renders learn react link', () => {
   expect(getByText(/Loading/i)).toBeInTheDocument();
 });
 
-/*
-describe('67087596', () => {
+
+describe('load the state from the API', () => {
   it('should pass', async () => {
-    const nameAndEmail = {
-      name: 'John Smith',
-      email: '123@123.com',
-    };
-    const getSpy = jest.spyOn(window, 'fetch').mockImplementation(mockFetch);
+	const getSpy = jest.spyOn(window, 'fetch')
+		.mockImplementation(jest.fn(() => Promise.resolve(
+		{ 
+			json: () => { 
+				console.log("getSpy: We are about to resolve a promise");
+				return Promise.resolve(blogpostsResponse)
+			}, 
+		})
+	, ) as jest.Mock);
     const store = configureStore({
       reducer: {
-		  userstories: function (state = '', action) {
+		  blogposts: function (state = '', action) {
 			switch (action.type) {
-			  case 'userstories/getUserStories/fulfilled':
+			  case 'blogposts/getBlogPosts/fulfilled':
 				console.log(`action.type = ${action.type} We are in getUserStories/fulfilled`);
 				return action.payload;
-			  case 'userstories/getUserStories/rejected':
+			  case 'blogposts/getBlogPosts/rejected':
 				console.log(`action.type = ${action.type} We are in getUserStories/rejected`);
 				return action.payload;			
 			  default:
@@ -42,10 +58,9 @@ describe('67087596', () => {
 		  }
       },
     });
-    await store.dispatch(getUserStories());
-    expect(getSpy).toBeCalledWith('api/userstories');
+    await store.dispatch(getBlogPosts());
+    expect(getSpy).toBeCalledWith('https://api.geekitude.com/api/blogposts');
     const state = store.getState();
-    expect(state).toEqual('1');
+    expect(state).toEqual({blogposts: blogpostsResponse});
   });
 });
-*/

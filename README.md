@@ -1,12 +1,4 @@
-This application was created for a presentation at the Women Who Code ATX chapter. It illustrates React.js Redux-toolkit. The presentation slides are here: 
-
-http://geekitude.com/Presentations/20221013-ReactReduxToolkit/index.html
-
-It is deployed at https://redux-toolkit-tickets.vercel.app/ (`main` branch).
-
-The branch `20221011-List` is deployed at https://redux-toolkit-tickets-elze.vercel.app/ . In this branch, there is just one component that has a list of all the user stories. However, in the `main` branch, each user story is in its own separate component. I'm trying to figure out why the parent component and all the children components re-render when I change the state of only one child component.
-
-To get just the most basic application code, you can checkout the tag 1.0. That version has only the async actions, and all it does is it gets data from the backend and displays it.
+This application was created to experiment React.js Redux-toolkit. 
 
 This application has a backend and a frontend. You don't have to run the backend server, but you can. Currently, the backend API is hosted on my website. If you want to run the backend server locally, you can start it the following way (assuming you are in the top-level directory of this application):
 
@@ -16,13 +8,13 @@ This application has a backend and a frontend. You don't have to run the backend
 
 `node index.js`
 
-Then, open `src/features/userstories/userStoriesSlice.ts`, comment out the line
+Then, open `src/features/blogposts/blogPostsSlice.ts`, comment out the line
 
-`const res = await fetch('https://api.geekitude.com/api/userStories').then(`
+`const res = await fetch('https://api.geekitude.com/api/blogposts').then(`
 
 and uncomment the line
 
-`const res = await fetch('api/userstories').then(`
+`const res = await fetch('api/blogposts').then(`
 
 Then, in a separate terminal window, `cd` to the top-level directory of this application, and follow the standard instructions below to start the frontend server.
 
