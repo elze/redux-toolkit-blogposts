@@ -1,11 +1,11 @@
-import { useSelector } from 'react-redux'
+import { useSelector, shallowEqual } from 'react-redux'
 import { useAppDispatch } from '../../app/hooks';
 import { changeStatus, selectBlogPost, blogPostStatusOptions, BlogPost, PostAndStatus, StatusNames } from './blogPostsSlice'
 import styles from './BlogPosts.module.css';
 
 export default function BlogPostComponent({num}: {num: number}) {	
   const dispatch = useAppDispatch();
-  const blogPost = useSelector(selectBlogPost(num));
+  const blogPost = useSelector(selectBlogPost(num), shallowEqual);
   
   const handleChange = (blogPost: BlogPost, event: any) => {
 	const found = blogPostStatusOptions.find((elem) => {

@@ -30,11 +30,18 @@ export interface PostAndStatus {
 
 export interface BlogPostsState {
   entities: BlogPost[],
+  ids: number[],
+  loading: boolean
+}
+
+export interface BlogPostsIds {
+  ids: number[],
   loading: boolean
 }
 
 const initialState: BlogPostsState = {
   entities: [],
+  ids: [],
   loading: false,
 }
 
@@ -73,6 +80,7 @@ export const blogPostsSlice = createSlice({
       .addCase(getBlogPosts.fulfilled, (state, action) => {
 		state.loading = false
         state.entities = action.payload;
+		state.ids = state.entities.map((elem: BlogPost) => parseInt(elem.id));
       })
       .addCase(getBlogPosts.rejected, (state, action) => {
 		  console.log(`We are in getBlogPosts.rejected: action = ${action} action.payload = ${action.payload} action.error = ${JSON.stringify(action.error)}`);
@@ -84,6 +92,8 @@ export const blogPostsSlice = createSlice({
 export const { changeStatus } = blogPostsSlice.actions;
 
 export const selectBlogPosts = (state: RootState) => state.blogposts;
+
+export const selectBlogPostsIds = (state: RootState) => <BlogPostsIds>{ids: state.blogposts.ids, loading: state.blogposts.loading};
 
 export const selectBlogPost = (id: number) => (state: RootState) => state.blogposts.entities[id];
 

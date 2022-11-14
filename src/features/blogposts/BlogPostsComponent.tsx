@@ -1,14 +1,15 @@
 import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, shallowEqual } from 'react-redux'
 import { useAppDispatch } from '../../app/hooks';
-import { getBlogPosts, selectBlogPosts, BlogPost } from './blogPostsSlice';
+import { getBlogPosts, selectBlogPosts, selectBlogPostsIds, BlogPost } from './blogPostsSlice';
 import BlogPostComponent from './BlogPostComponent';
 import styles from './BlogPosts.module.css';
 
 export default function BlogPostsComponent() {
   const dispatch = useAppDispatch();
   // const { entities, loading } = useSelector((state: UserStoriesState) => state.userstories)
-  const { entities, loading } = useSelector(selectBlogPosts)
+  // const { entities, loading } = useSelector(selectBlogPosts)
+  const { ids, loading } = useSelector(selectBlogPostsIds, shallowEqual)
 
   useEffect(() => {
 	console.log(`BlogPostsComponent: useEffect`);
@@ -27,9 +28,11 @@ export default function BlogPostsComponent() {
 			<div className={`${styles.surroundingText} ${styles.cellContainer}`}><b>Move to</b></div>			
 		</div>		  
 	  {
-		  entities ?
-			entities.map((blogPost: BlogPost, ind: number) => (
-				<BlogPostComponent key={blogPost.id} num={ind}/>
+		  // entities ?
+		  ids ? 
+			// entities.map((blogPost: BlogPost, ind: number) => (
+			ids.map((id: number, ind: number) => (			
+				<BlogPostComponent key={id} num={ind}/>
 			))
 			: <h3>No posts found</h3>
 	  }
