@@ -9,7 +9,7 @@ export default function BlogPostsComponent() {
   const dispatch = useAppDispatch();
   // const { entities, loading } = useSelector((state: UserStoriesState) => state.userstories)
   // const { entities, loading } = useSelector(selectBlogPosts)
-  const { ids, loading } = useSelector(selectBlogPostsIds, shallowEqual)
+  const { ids, loading, error } = useSelector(selectBlogPostsIds, shallowEqual)
 
   useEffect(() => {
 	console.log(`BlogPostsComponent: useEffect`);
@@ -20,7 +20,7 @@ export default function BlogPostsComponent() {
     
   return (
     <div>	
-      <h2>Blog Posts</h2>
+      <h2 data-testid="blog-posts-header">Blog Posts</h2>
 		<div className={styles.blogPostsContainer}>
 			<div className={`${styles.surroundingText} ${styles.cellContainer}`}><b>ID</b></div>
 			<div className={`${styles.surroundingText} ${styles.cellContainer}`}><b>Title</b></div>
@@ -29,12 +29,12 @@ export default function BlogPostsComponent() {
 		</div>		  
 	  {
 		  // entities ?
-		  ids ? 
+		  ids && ids.length > 0 ? 
 			// entities.map((blogPost: BlogPost, ind: number) => (
 			ids.map((id: number, ind: number) => (			
 				<BlogPostComponent key={id} num={ind}/>
 			))
-			: <h3>No posts found</h3>
+			: <h3>No posts found: an error occurred: { error } </h3>
 	  }
     </div>
   )

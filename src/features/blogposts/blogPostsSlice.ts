@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
+import axios from 'axios';
 import { RootState } from '../../app/store';
 
 export enum StatusNames {
@@ -31,27 +32,30 @@ export interface PostAndStatus {
 export interface BlogPostsState {
   entities: BlogPost[],
   ids: number[],
-  loading: boolean
+  loading: boolean,
+  error: string | undefined
 }
 
 export interface BlogPostsIds {
   ids: number[],
-  loading: boolean
+  loading: boolean,
+  error: string | undefined
 }
 
 const initialState: BlogPostsState = {
   entities: [],
   ids: [],
   loading: false,
+  error: undefined
 }
 
 export const getBlogPosts = createAsyncThunk(
   'blogposts/getBlogPosts',
   async (thunkAPI) => {
-    // const res = await fetch('api/blogposts').then(
-	const res = await fetch('https://api.geekitude.com/api/blogposts').then(
-    (data) => data.json()
-  )
+	const res = axios.get('https://api.geekitude.com/api/blogposts').then((response) => {		
+	// const res = axios.get('api/blogposts').then((response) => {			
+      return response.data;
+    });	
   return res
 })
 
@@ -60,6 +64,7 @@ export const blogPostsSlice = createSlice({
   initialState,
   reducers: {
     changeStatus: (state, action: PayloadAction<PostAndStatus>) => {
+		console.log(`blogPostsSlice: state = ${JSON.stringify(state)}`);
 		console.log(`blogPostsSlice: action.payload.blogPostStatus = ${action.payload.blogPostStatus}`);
 		const id = action.payload.id;
 		
@@ -80,11 +85,13 @@ export const blogPostsSlice = createSlice({
       .addCase(getBlogPosts.fulfilled, (state, action) => {
 		state.loading = false
         state.entities = action.payload;
+		console.log(`We are in getBlogPosts.fulfilled: action = ${JSON.stringify(action)} action.payload = ${JSON.stringify(action.payload)}}`);
 		state.ids = state.entities.map((elem: BlogPost) => parseInt(elem.id));
       })
       .addCase(getBlogPosts.rejected, (state, action) => {
-		  console.log(`We are in getBlogPosts.rejected: action = ${action} action.payload = ${action.payload} action.error = ${JSON.stringify(action.error)}`);
+		  console.log(`We are in getBlogPosts.rejected: action = ${action} action.payload = ${action.payload} action.error.message = ${JSON.stringify(action.error.message)}`);
 		state.loading = false;
+		state.error = action.error.message;
       });
   },  
 })
@@ -93,7 +100,7 @@ export const { changeStatus } = blogPostsSlice.actions;
 
 export const selectBlogPosts = (state: RootState) => state.blogposts;
 
-export const selectBlogPostsIds = (state: RootState) => <BlogPostsIds>{ids: state.blogposts.ids, loading: state.blogposts.loading};
+export const selectBlogPostsIds = (state: RootState) => <BlogPostsIds>{ids: state.blogposts.ids, loading: state.blogposts.loading, error: state.blogposts.error};
 
 export const selectBlogPost = (id: number) => (state: RootState) => state.blogposts.entities[id];
 
