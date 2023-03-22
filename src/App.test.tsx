@@ -5,7 +5,7 @@ import { render } from '@testing-library/react';
 import BlogPostsComponent from './features/blogposts/BlogPostsComponent';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
-import blogPostsReducer from './features/blogposts/blogPostsSlice';
+import blogPostsReducer, {BlogPostStatus} from './features/blogposts/blogPostsSlice';
 
 import axios from "axios";
 
@@ -19,12 +19,12 @@ const blogPosts = [
 	{
 		id: '1111',
 		title: 'How to prevent re-renderings when using useSelector hook',
-		blogPostStatus: 'draft',
+		blogPostStatus: 'draft' as BlogPostStatus,
 	},
 	{
 		id: '2222',
 		title: 'How to prevent re-renderings when using Redux-Toolkit',
-		blogPostStatus: 'draft',
+		blogPostStatus: 'draft' as BlogPostStatus,
 	}
 ];
 
