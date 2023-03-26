@@ -4,7 +4,7 @@ This application was created to experiment React.js Redux-toolkit. It is deploye
 
 It is also deployed here on Vercel:
 
-https://github.com/elze/redux-toolkit-blogposts
+https://redux-toolkit-blogposts.vercel.app/
 
 This application has a backend and a frontend. You don't have to run the backend server, but you can. Currently, the backend API is hosted on my website. If you want to run the backend server locally, you can start it the following way (assuming you are in the top-level directory of this application):
 
