@@ -91,6 +91,8 @@ export const blogPostsSlice = createSlice({
       .addCase(getBlogPosts.rejected, (state, action) => {
 		  console.log(`We are in getBlogPosts.rejected: action = ${action} action.payload = ${action.payload} action.error.message = ${JSON.stringify(action.error.message)}`);
 		state.loading = false;
+		state.entities = [];
+		state.ids = [];
 		state.error = action.error.message;
       });
   },  

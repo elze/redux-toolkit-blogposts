@@ -18,12 +18,12 @@ jest.mock("axios");
 const blogPosts = [
 	{
 		id: '1111',
-		title: 'How to prevent re-renderings when using useSelector hook',
+		title: 'How to prevent re-renderings when using Redux-Toolkit',
 		blogPostStatus: 'draft' as BlogPostStatus,
 	},
 	{
 		id: '2222',
-		title: 'How to prevent re-renderings when using Redux-Toolkit',
+		title: 'Comparison between Redux and Redux-Toolkit',
 		blogPostStatus: 'draft' as BlogPostStatus,
 	}
 ];
@@ -32,26 +32,43 @@ const blogpostsResponse = {
 	data: blogPosts
 };
 
+describe('test the text on the screen', () => {
+	it("renders blogposts if the API call succeeds", async () => {
+		(axios.get as jest.Mock).mockResolvedValue(blogpostsResponse);
+		const { findByText, findByTestId } = render(  
+		<Provider store={store}>
+		  <App />
+		</Provider>
+		);
 
-it("renders blogpost data", async () => {
-	(axios.get as jest.Mock).mockResolvedValue(blogpostsResponse);
-	const { findByText, findByTestId } = render(  
-	<Provider store={store}>
-	  <App />
-	</Provider>
-	);
+		const bpHeader = await findByTestId('blog-posts-header');
+		console.log(`result of findByTestId : bpHeader.tagName = ${bpHeader.tagName} bpHeader.textContent = ${bpHeader.textContent}`);
+		expect(bpHeader).toBeTruthy();
+		expect(bpHeader.tagName).toBe("H2");
+		expect(bpHeader.textContent).toBe("Blog Posts");
 
-	const bpHeader = await findByTestId('blog-posts-header');
-	console.log(`result of findByTestId : bpHeader.tagName = ${bpHeader.tagName} bpHeader.textContent = ${bpHeader.textContent}`);
-	expect(bpHeader).toBeTruthy();
-	expect(bpHeader.tagName).toBe("H2");
-	expect(bpHeader.textContent).toBe("Blog Posts");
+		const comparison = await findByText(/Comparison/);
+		console.log(`result of findByText : comparison.tagName = ${comparison.tagName} comparison.textContent = ${comparison.textContent}`);
+		expect(comparison).toBeTruthy();
+		expect(comparison.tagName).toBe("DIV");
+		expect(comparison.textContent).toBe("Comparison between Redux and Redux-Toolkit"); 
+	});
 
-	const bpUseSelector = await findByText(/useSelector hook/);
-	console.log(`result of findByText : bpUseSelector.tagName = ${bpUseSelector.tagName} bpUseSelector.textContent = ${bpUseSelector.textContent}`);
-	expect(bpUseSelector).toBeTruthy();
-	expect(bpUseSelector.tagName).toBe("DIV");
-	expect(bpUseSelector.textContent).toBe("How to prevent re-renderings when using useSelector hook");  
+	it("shows an error if the API call fails", async () => {
+		const message = "Request failed";
+		(axios.get as jest.Mock).mockRejectedValue(message);
+		const { findByText, findByTestId } = render(  
+		<Provider store={store}>
+		  <App />
+		</Provider>
+		);
+
+		const noPostsFound = await findByText(/No posts found/);
+		console.log(`result of findByText : noPostsFound.tagName = ${noPostsFound.tagName} noPostsFound.textContent = ${noPostsFound.textContent}`);
+		expect(noPostsFound).toBeTruthy();
+		expect(noPostsFound.tagName).toBe("H3");
+		expect(noPostsFound.textContent).toBe(`No posts found: an error occurred: ${message} `); 
+	});
 });
 
 describe('load the state from the API', () => {
@@ -124,12 +141,12 @@ describe('Change a blogpost status', () => {
 	const newBlogPosts = [
 	{
 		id: '1111',
-		title: 'How to prevent re-renderings when using useSelector hook',
+		title: 'How to prevent re-renderings when using Redux-Toolkit',
 		blogPostStatus: 'draft',
 	},
 	{
 		id: '2222',
-		title: 'How to prevent re-renderings when using Redux-Toolkit',
+		title: 'Comparison between Redux and Redux-Toolkit',
 		blogPostStatus: 'published',
 	}
 	];
