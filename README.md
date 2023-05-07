@@ -1,10 +1,20 @@
-This application was created to experiment React.js Redux-toolkit. It is deployed on StackBlitz.
+This application was created to experiment with React.js Redux-toolkit. It is deployed on StackBlitz.
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/edit/github-5uqdqv?file=src%2Ffeatures%2Fblogposts%2FBlogPostsComponent.tsx&title=redux-toolkit-blogposts)
 
 It is also deployed here on Vercel:
 
 https://redux-toolkit-blogposts.vercel.app/
+
+Here are some presentations I gave that use this application to illustrate the concepts:
+<a href="http://geekitude.com/Presentations/20221013-ReactReduxToolkit/slides.html">How to build React.js applications with the redux-toolkit library</a>
+<a href="http://geekitude.com/Presentations/20221106-ReactUseSelectorRerendering/slides.html#/">Preventing re-rendering of multiple child components when using useSelector hook in React.js</a>
+<a href="http://geekitude.com/Presentations/20230413_ReactReduxToolkit_UnitTesting">Unit-testing a React.js / redux-toolkit application, part 1</a>
+<a href="http://geekitude.com/Presentations/20230511_ReactReduxToolkit_UnitTesting_Part2/slides2.html#/">Unit-testing a React.js / redux-toolkit application, part 2</a>
+
+
+
+
 
 This application has a backend and a frontend. You don't have to run the backend server, but you can. Currently, the backend API is hosted on my website. If you want to run the backend server locally, you can start it the following way (assuming you are in the top-level directory of this application):
 
