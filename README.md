@@ -7,9 +7,13 @@ It is also deployed here on Vercel:
 https://redux-toolkit-blogposts.vercel.app/
 
 Here are some presentations I gave that use this application to illustrate the concepts:
+
 <a href="http://geekitude.com/Presentations/20221013-ReactReduxToolkit/slides.html">How to build React.js applications with the redux-toolkit library</a>
+
 <a href="http://geekitude.com/Presentations/20221106-ReactUseSelectorRerendering/slides.html#/">Preventing re-rendering of multiple child components when using useSelector hook in React.js</a>
+
 <a href="http://geekitude.com/Presentations/20230413_ReactReduxToolkit_UnitTesting">Unit-testing a React.js / redux-toolkit application, part 1</a>
+
 <a href="http://geekitude.com/Presentations/20230511_ReactReduxToolkit_UnitTesting_Part2/slides2.html#/">Unit-testing a React.js / redux-toolkit application, part 2</a>
 
 
