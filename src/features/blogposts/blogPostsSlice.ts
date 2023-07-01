@@ -52,7 +52,7 @@ const initialState: BlogPostsState = {
 export const getBlogPosts = createAsyncThunk(
   'blogposts/getBlogPosts',
   async (thunkAPI) => {
-	const res = axios.get('https://api.geekitude.com/api/blogposts').then((response) => {		
+	const res = axios.get('https://api.geekitude.com/api/blogposts', { headers: {'cache-control': 'no-cache'} }).then((response) => {		
 	// const res = axios.get('api/blogposts').then((response) => {			
       return response.data;
     });	
